@@ -106,3 +106,4 @@ go run main.go
 
 - Untuk system design ada di folder `system-design`
 - Untuk diagram database ada di folder `db`
+- Untuk postman collection ada di folder `postman`
