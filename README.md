@@ -70,6 +70,7 @@ go run main.go
 ```
 
 - Server sudah berjalan di `http://localhost:3000`
+- Atau anda bisa jalankan via mode debugging yang sudah saya siapkan di launch.json
 
 ### Langkah 5: Test API
 
