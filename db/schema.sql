@@ -40,10 +40,10 @@ CREATE TABLE refunds (
     refunded_at TIMESTAMP DEFAULT NOW()
 );
 
--- Admin user
+-- Admin user // email : admin@example.com , password : passwordadmin
 INSERT INTO users (email, password_hash, role) VALUES
 ('admin@example.com', '$2y$10$rWtnD2zZkuIw/EbrEG1ma.TyHCHjcWn6LgIIMr0qclwbNyiFRJBJi', 'admin');
 
--- Regular user // email : user@example.com , password : password
+-- Regular user // email : user@example.com , password : passworduser
 INSERT INTO users (email, password_hash, role) VALUES
 ('user@example.com', '$2y$10$5m08xsUKsP535ALYosXL1e4.sN7m.6rDSw5Sj2YyVb34EOXMtjS.q', 'user');

@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Cinema Ticket API - APPS2PAY 2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Login (User)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"passworduser\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "http://localhost:3000/login"
+      }
+    },
+    {
+      "name": "🔐 Login (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"passwordadmin\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "http://localhost:3000/login"
+      }
+    },
+    {
+      "name": "🎬 [ADMIN] Create Schedule",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"movie_title\": \"Dune: Part Two\",\n  \"cinema_branch\": \"CGV Grand Indonesia\",\n  \"city\": \"Jakarta\",\n  \"show_time\": \"2025-10-25T20:00:00Z\",\n  \"total_seats\": 100\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "http://localhost:3000/api/schedules"
+      }
+    },
+    {
+      "name": "🎬 [USER] Get All Schedules",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:3000/api/schedules"
+      }
+    },
+    {
+      "name": "🎬 [USER] Get Schedule by ID",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:3000/api/schedules/1"
+      }
+    },
+    {
+      "name": "🪑 [USER] Get Seats for Schedule",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:3000/api/schedules/1/seats"
+      }
+    },
+    {
+      "name": "🔒 [USER] Lock Seat (A1)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"seat_number\": \"A1\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "http://localhost:3000/api/schedules/1/seats/lock"
+      }
+    },
+    {
+      "name": "✅ [USER] Confirm Seat Purchase",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"seat_number\": \"A1\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "http://localhost:3000/api/schedules/1/seats/confirm"
+      }
+    },
+    {
+      "name": "🔓 [USER] Release Seat (A1)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "http://localhost:3000/api/schedules/1/seats/release?seat=A1"
+      }
+    },
+    {
+      "name": "🎬 [ADMIN] Update Schedule",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"movie_title\": \"Dune: Part Two (Updated)\",\n  \"cinema_branch\": \"CGV Grand Indonesia\",\n  \"city\": \"Jakarta\",\n  \"show_time\": \"2025-10-25T21:00:00Z\",\n  \"total_seats\": 100\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "http://localhost:3000/api/schedules/1"
+      }
+    },
+    {
+      "name": "🗑️ [ADMIN] Delete Schedule",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+        "url": "http://localhost:3000/api/schedules/1"
+      }
+    },
+    {
+      "name": "❌ [ADMIN] Cancel Schedule (Refund All)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+        "url": "http://localhost:3000/api/schedules/1/cancel"
+      }
+    }
+  ],
+  "variable": [
+    { "key": "token", "value": "" },
+    { "key": "admin_token", "value": "" }
+  ]
+}

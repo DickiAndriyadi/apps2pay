@@ -1,0 +1,45 @@
+---
+config:
+  theme: default
+---
+erDiagram
+    users ||--o{ schedules : "tidak langsung"
+    schedules ||--o{ seats : "memiliki"
+    schedules ||--o{ refunds : "memicu"
+
+    users {
+        int id PK
+        string email
+        string password_hash
+        string role
+        timestamp created_at
+    }
+
+    schedules {
+        int id PK
+        string movie_title
+        string cinema_branch
+        string city
+        timestamp show_time
+        int total_seats
+        string status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    seats {
+        int id PK
+        int schedule_id FK
+        string seat_number
+        string status
+        timestamp locked_until
+        timestamp sold_at
+    }
+
+    refunds {
+        int id PK
+        int schedule_id FK
+        int seat_id FK
+        string reason
+        timestamp refunded_at
+    }

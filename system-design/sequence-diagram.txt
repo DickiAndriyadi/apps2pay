@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant Pelanggan as Pelanggan (Anda)
+    participant Aplikasi as Aplikasi Tiket Bioskop
+    participant Admin as Petugas Bioskop
+
+    Pelanggan->>Aplikasi: Login ke akun saya
+    Aplikasi-->>Pelanggan: Berhasil masuk!
+
+    Pelanggan->>Aplikasi: Lihat daftar film & jadwal tayang
+    Aplikasi-->>Pelanggan: Ini daftar film yang sedang tayang
+
+    Pelanggan->>Aplikasi: Lihat peta kursi untuk jadwal tertentu
+    Aplikasi-->>Pelanggan: Ini kursi yang masih kosong (hijau), sedang dipilih (kuning), atau sudah terjual (merah)
+
+    Pelanggan->>Aplikasi: Saya pilih kursi A1!
+    Aplikasi-->>Pelanggan: Kursi A1 berhasil dikunci untuk Anda selama 15 menit
+
+    Pelanggan->>Aplikasi: Saya selesaikan pembayaran sekarang
+    Aplikasi-->>Pelanggan: Tiket Anda berhasil dibeli! Kursi A1 resmi milik Anda.
+
+    Note over Pelanggan,Aplikasi: Jika tidak bayar dalam 15 menit,<br/>kursi akan dikembalikan ke penjualan
+
+    Admin->>Aplikasi: Login sebagai petugas bioskop
+    Aplikasi-->>Admin: Selamat datang, Admin!
+
+    Admin->>Aplikasi: Batalkan jadwal film "Avengers" karena listrik mati
+    Aplikasi-->>Admin: Jadwal dibatalkan. Semua pembeli akan otomatis direfund.
+
+    Note right of Aplikasi: Sistem otomatis:<br/>- Kembalikan kursi yang belum dibayar<br/>- Refund tiket yang sudah dibeli jika jadwal dibatalkan

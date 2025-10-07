@@ -1,0 +1,26 @@
+---
+config:
+  theme: default
+---
+flowchart TD
+    A(["Pelanggan Buka Aplikasi"])
+    A --> B["Lihat Daftar Film & Jadwal"]
+    B --> C["Pilih Jadwal Tayang"]
+    C --> D["Lihat Peta Kursi\n(Hijau = Kosong, Kuning = Dipilih, Merah = Terjual)"]
+    D --> E{"Pilih Kursi Kosong?"}
+    E -->|Ya| F["Kursi Dikunci Selama 15 Menit"]
+    E -->|Tidak| D
+    F --> G{"Bayar Sekarang?"}
+    G -->|Ya| H["Tiket Berhasil Dibeli!\nKursi Jadi Milik Anda"]
+    G -->|Tidak| I["Tunggu..."]
+    I --> J{"Sudah 15 Menit?"}
+    J -->|Ya| K["Kursi Dikembalikan ke Penjualan"]
+    J -->|Belum| I
+    H --> L(["Selesai"])
+
+    M(["Petugas Bioskop"])
+    M --> N{"Batalkan Jadwal?"}
+    N -->|Ya| O["Semua Tiket Direfund\nKursi Dikembalikan"]
+    N -->|Tidak| P(["Tidak Ada Perubahan"])
+    O --> Q(["Selesai"])
+    P --> Q

@@ -6,20 +6,42 @@ import (
 	"apps2pay/worker"
 	"context"
 	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 )
 
 func main() {
-	conn, err := pgx.Connect(context.Background(), "postgres://myuser:password@localhost:5432/cinema_db?sslmode=disable")
+	// Load .env
+	if err := godotenv.Load(); err != nil {
+		log.Println("⚠️  No .env file found, using system env")
+	}
+
+	dbURL := os.Getenv("DATABASE_URL")
+	if dbURL == "" {
+		log.Fatal("❌ DATABASE_URL is required")
+	}
+
+	redisAddr := os.Getenv("REDIS_ADDR")
+	if redisAddr == "" {
+		redisAddr = "localhost:6379" // default
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
+	conn, err := pgx.Connect(context.Background(), dbURL)
 	if err != nil {
 		log.Fatal("❌ Cannot connect to DB:", err)
 	}
 	defer conn.Close(context.Background())
 	redisClient := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
+		Addr: redisAddr,
 	})
 
 	handlers.SetDB(conn, redisClient)
@@ -52,6 +74,6 @@ func main() {
 	admin.Post("/schedules/:id/cancel", handlers.CancelSchedule)
 
 	log.Println("🚀 Server running on http://localhost:3000")
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(port))
 
 }
