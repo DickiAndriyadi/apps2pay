@@ -6,7 +6,7 @@
 
 **Email**: dicki.andriyadi14@gmail.com
 
-**Nomor Telepon**: +62851158011846
+**Nomor Telepon**: +6281326715790
 
 **Repository**: https://github.com/DickiAndriyadi/apps2pay
 
